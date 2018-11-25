@@ -1,30 +1,28 @@
 import * as React from 'react';
 
-import './PersonaList.scss';
+import './PersonaHood.scss';
 import { store } from '../../../stores/Stores';
 
-interface PersonaListProps {
+interface PersonaHoodProps {
     id: string;
     name: string;
     img: string;
 }
 
-export const PersonaList = ({ id, name, img }: PersonaListProps) => {
-    let personaListStyle = {
+export const PersonaHood = ({ id, name, img }: PersonaHoodProps) => {
+    let personaHoodStyle = {
 
         backgroundImage: `url(./assets/img/foto/${img}.jpg)`,
 
       };
     
-    return <div className="personaList" onClick={(e) => {
+    return <div className="personaHood" onClick={(e) => {
         e.preventDefault();
         store.operations.actualUserID = id;
         console.log(store.operations.actualUserID);
         store.operations.getSelectedPersonData();
         }}>
-            <p>{name.substr(0,name.indexOf(' '))}</p>
-
-        <div className="background"  style={personaListStyle}>
+        <div className="background"  style={personaHoodStyle}>
         </div>
     </div>;
 }

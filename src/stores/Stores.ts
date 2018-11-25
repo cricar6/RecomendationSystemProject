@@ -7,6 +7,7 @@ class Stores {
     data = new DataStore();
     dash = new DashBoardStore();
 
+
 }
 
 export const store = new Stores();

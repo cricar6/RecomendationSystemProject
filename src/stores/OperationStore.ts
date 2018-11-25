@@ -23,9 +23,10 @@ export class OperationStore {
     @observable indianIngredientsArray: any = [];
     @observable restaurantArray: any = [];
 
+    @observable actualUserID: string = "";
+    @observable actualPerson: any = {};
 
-    @observable actualUserID: string = "1113697695";
-    @observable k: number = 7;
+    @observable k: number = 4;
 
     @observable foodHood: any = [];
 
@@ -34,6 +35,21 @@ export class OperationStore {
     @observable topIngredientsArray: any = [];
     @observable topRestaurantName: string = "Comida";
     @observable topRestaurantPunctation: number = 0;
+
+    @action getSelectedPersonData() {
+        this.getFoodHood(store.operations.actualUserID, store.operations.foodArray, store.operations.k);
+        this.generateFoodResults();
+        this.generateIngredientResults();
+        this.generateRestaurantResults();
+
+        this.actualPerson = {
+            id: this.foodHood[this.foodHood.length - 1].id,
+            name: this.foodHood[this.foodHood.length - 1].name,
+            image: this.foodHood[this.foodHood.length - 1].image
+        }
+
+        console.log(this.actualPerson.name, "This is the user selected")
+    }
 
     @action generateUserArray() {
         store.data.users.forEach((element: any) => {
@@ -304,7 +320,7 @@ export class OperationStore {
         let restaurantSumArray: any = [];
 
         restaurantSums = this.getTopSums(this.restaurantArray, "restaurants", this.foodHood);
-        
+
 
 
         for (let index = 0; index < restaurantSums.length; index++) {
