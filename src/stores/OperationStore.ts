@@ -14,6 +14,7 @@ export class OperationStore {
     @observable titlesForIndianIngredients: any = ["Albahaca", "Rugula", "Pimenton", "Tomate"];
 
     @observable userArray: any = [];
+    @observable userArrayBackup: any = [];
     @observable foodArray: any = [];
     @observable mexicanIngredientsArray: any = [];
     @observable italianIngredientsArray: any = [];
@@ -38,13 +39,17 @@ export class OperationStore {
         store.data.users.forEach((element: any) => {
             const nameTemp = element[0];
             const idTemp = element[1];
+            const imgTemp = element[2];
+
 
             let user = {
                 name: nameTemp,
-                id: idTemp
+                id: idTemp,
+                image: imgTemp
             };
 
             this.userArray.push(user);
+            this.userArrayBackup.push(user);
         });
 
         console.log(this.userArray);
@@ -104,11 +109,13 @@ export class OperationStore {
             let cosineSimilarity = this.calculateCosSim(element, arrayToFind[thisUserIndex]);
             let name = this.userArray[index].name;
             let id = this.userArray[index].id;
+            let img = this.userArray[index].image;
 
 
             let user = {
                 name: name,
                 id: id,
+                image: img,
                 index: index,
                 cosineSimilarity: cosineSimilarity,
             }

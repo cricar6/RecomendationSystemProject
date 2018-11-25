@@ -1,0 +1,41 @@
+.personSelectorComponent {
+    background: white;
+    height: 100vh;
+    width: 200px;
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    .searchBar {
+        display: flex;
+        flex-direction: row;
+        padding: 5px 10px;
+        margin: 10px;
+        box-sizing: border-box;
+        border-radius: 20px;
+        border: 2px #e5e5e5 solid; 
+        .icon {
+            width: 20px;
+            height: 20px;
+            background-size: cover;  
+            z-index: 90;                       
+        }        
+        .searchIcon {
+            background-image: 'url("./assets/img/icons/searchIcon.png")'                             
+        }
+        input {
+            background: transparent;
+            border: none;
+            width: 130px;
+        }
+    }
+
+    .personSelector{
+        padding: 10px 15px;
+        width: 200px;
+        height: 100vh;
+        overflow-y: scroll;
+
+    }
+}
