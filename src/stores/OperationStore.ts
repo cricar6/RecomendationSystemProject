@@ -15,6 +15,7 @@ export class OperationStore {
 
     @observable userArray: any = [];
     @observable userArrayBackup: any = [];
+
     @observable foodArray: any = [];
     @observable mexicanIngredientsArray: any = [];
     @observable italianIngredientsArray: any = [];
@@ -36,19 +37,21 @@ export class OperationStore {
     @observable topRestaurantName: string = "Comida";
     @observable topRestaurantPunctation: number = 0;
 
-    @action getSelectedPersonData() {
+    @action getSelectedPersonData(id: string) {
+        this.actualUserID = id;
+        console.log(this.actualUserID, 'this is the actual user');
+        console.log(this.actualPerson, 'this is the actual user');
+
+
+        this.actualPerson = this.userArray.find((e: any) => {
+            return e.id == this.actualUserID;
+        })
+        console.log(this.actualPerson, "This is the user selected")
+
         this.getFoodHood(store.operations.actualUserID, store.operations.foodArray, store.operations.k);
         this.generateFoodResults();
         this.generateIngredientResults();
         this.generateRestaurantResults();
-
-        this.actualPerson = {
-            id: this.foodHood[this.foodHood.length - 1].id,
-            name: this.foodHood[this.foodHood.length - 1].name,
-            image: this.foodHood[this.foodHood.length - 1].image
-        }
-
-        console.log(this.actualPerson.name, "This is the user selected")
     }
 
     @action generateUserArray() {
@@ -68,7 +71,7 @@ export class OperationStore {
             this.userArrayBackup.push(user);
         });
 
-        console.log(this.userArray);
+        console.log(this.userArray, 'these are all the users');
     }
 
     @action numberifyArray(array: any) {
@@ -110,15 +113,15 @@ export class OperationStore {
 
         return aibi / ((Math.sqrt(aPotencied)) * (Math.sqrt(bPotencied)));
     }
+
     @action getFoodHood(userID: string, arrayToFind: any, k: number) {
 
         let thisUserIndex = this.userArray.findIndex((e: any) => {
             return e.id == userID;
         });
 
+
         let userSimilaritiesUserArray: any = [];
-        let userSimilaritiesArray: any = [];
-        let userSimilaritiesArrayBackUp: any = [];
 
         for (let index = 0; index < arrayToFind.length; index++) {
             const element = arrayToFind[index];
@@ -135,36 +138,27 @@ export class OperationStore {
                 index: index,
                 cosineSimilarity: cosineSimilarity,
             }
-            userSimilaritiesArray.push(cosineSimilarity);
-            userSimilaritiesArrayBackUp.push(cosineSimilarity);
+
             userSimilaritiesUserArray.push(user);
+
         }
 
         console.log(userSimilaritiesUserArray);
 
-        userSimilaritiesArray.sort();
+        this.sortArraySimilarities(userSimilaritiesUserArray);
 
-        console.log(userSimilaritiesArray);
 
-        while (userSimilaritiesArray.length != k + 1) {
-            userSimilaritiesArray.shift();
+        console.log(userSimilaritiesUserArray, "this is the userSimilaritiesUserArray without sorting");
+
+        while (userSimilaritiesUserArray.length != k + 1) {
+            userSimilaritiesUserArray.shift();
         }
 
-        this.foodHood = [];
+        console.log(userSimilaritiesUserArray, "this is the userSimilaritiesUserArray sorted");
 
-        userSimilaritiesArray.forEach((element: any) => {
+        this.foodHood = userSimilaritiesUserArray;
 
-
-            let index = userSimilaritiesArrayBackUp.findIndex((e: any) => {
-                return e == element;
-            });
-
-            this.foodHood.push(userSimilaritiesUserArray[index]);
-        });
-
-        console.log(userSimilaritiesArray);
-
-        console.log(this.foodHood);
+        console.log(this.foodHood, "this is the food hood for this user");
     }
 
     @action initializeVariables() {
@@ -175,6 +169,17 @@ export class OperationStore {
         this.spainIngredientsArray = this.numberifyArray(store.data.ingredientsSpain);
         this.indianIngredientsArray = this.numberifyArray(store.data.ingredientsIndian);
         this.restaurantArray = this.numberifyArray(store.data.restaurants);
+    }
+    @action sortArraySimilarities(array: any) {
+        array.sort((a: any, b: any) => {
+            if (a.cosineSimilarity < b.cosineSimilarity)
+                return -1;
+            if (a.cosineSimilarity > b.cosineSimilarity)
+                return 1;
+            return 0;
+        });
+
+        return array;
     }
 
     @action sortArray(array: any) {

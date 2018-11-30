@@ -5,6 +5,18 @@ export class DashBoardStore {
 
     @observable searchVar : string = "";
 
+    @observable userID : string = '';
+
+    @observable showHood: boolean = false;
+
+    @observable showSelector : boolean = false;
+
+    @observable showIngredients : boolean = false;
+
+    @action ondragstart (e: any, id: string) {
+        this.userID = id;
+        console.log (this.userID);
+    }
     @action search () {
         if (store.operations.userArrayBackup.some((e: any) => {
             return e.name.toLowerCase() == this.searchVar.toLowerCase();

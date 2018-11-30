@@ -1,0 +1,49 @@
+.dashBoard{
+    height: 100vh;
+    position: relative;
+    .personSelectorComponent{
+
+    }
+    .data {
+
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        height: 100%;
+        transition: all .5s ease;
+        .personDataComponent{
+        
+        }
+        .foodDataComponent{
+        
+        }
+    }
+    .toogler {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: #cbcbcb;
+        border-radius: 25px;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        transition: all .5s ease;
+
+    }
+
+    .tooglerHidden {
+        transform: translateX(200px)
+    }
+    
+    .tooglerVisible {
+        transform: translateX(0px)
+    
+    }
+}
+
+.withMargin {
+    padding-left: 230px;
+}
+.withoutMargin {
+    padding-left: 0px;
+}

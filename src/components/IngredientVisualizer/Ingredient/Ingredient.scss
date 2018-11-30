@@ -1,0 +1,42 @@
+.ingredientContainer {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    .ingredient {
+        border-radius: 100px;
+        width: 50px;
+        height: 50px;
+        position: relative;
+        cursor: pointer;
+        margin: 10px 0px;
+        background: white;
+        transition: all .5s ease;
+        &:hover {
+            width: 40px;
+            height: 40px;
+            border: 5px #EEE solid;
+        }
+    }
+    .name {
+        color:white;
+        font-weight: bold;
+        margin-left: 25px;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .ingredientContainer {
+
+        .ingredient {
+            width: 20px;
+            height: 20px;
+            margin: 5px 0px;
+        }
+    
+    }
+    
+    
+}
+

@@ -1,5 +1,4 @@
 .personDataComponent {
-    padding-left: 230px;
     color: #686868;
     display: flex;
     align-content: center;
@@ -22,11 +21,13 @@
         flex-direction: row;
         background: #EEE;
         box-shadow: 0px 0px 20px #BBB;
-
+        
         margin-bottom: -40px;
         border-radius: 40px;
         padding: 5px 10px;
         z-index: 90;
+        height: 50;
+
     }
     .personPhoto {
         width: 250px;
@@ -47,4 +48,56 @@
         font-size: 15px;
         margin-top: -25px;
     }
+}
+
+.hidden {
+    visibility: hidden
+}
+
+.visible {
+    visibility: visible
+}
+
+//RESPONSIVE
+
+@media only screen and (max-width: 600px) {
+    .personDataComponent {
+        .hoodCapacity {
+            font-weight: 900;
+            font-size: 22px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .foodHood {
+            display: flex;
+            align-content: center;
+            align-items: center;
+            flex-direction: row;
+            background: #EEE;
+            box-shadow: 0px 0px 20px #BBB;
+            
+            margin-bottom: -40px;
+            border-radius: 40px;
+            padding: 5px 10px;
+            z-index: 90;
+            height: 50;
+    
+        }
+        .personPhoto {
+            width: 210px;
+            height: 210px;
+    
+        }    
+        .personName {
+            font-size: 22px;
+        }    
+        .personID {
+    
+            font-size: 15px;
+    
+        }
+    }
+    
+    
 }

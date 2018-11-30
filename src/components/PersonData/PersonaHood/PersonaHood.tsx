@@ -18,9 +18,7 @@ export const PersonaHood = ({ id, name, img }: PersonaHoodProps) => {
     
     return <div className="personaHood" onClick={(e) => {
         e.preventDefault();
-        store.operations.actualUserID = id;
-        console.log(store.operations.actualUserID);
-        store.operations.getSelectedPersonData();
+            store.operations.getSelectedPersonData(id);
         }}>
         <div className="background"  style={personaHoodStyle}>
         </div>

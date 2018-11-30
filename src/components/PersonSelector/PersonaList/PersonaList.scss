@@ -21,7 +21,9 @@
 
         &:hover {
             filter: grayscale(0%);
-
+            width: 180px;
+            height: 180px;
+            border: 5px #EEE solid;
         }
     }
 

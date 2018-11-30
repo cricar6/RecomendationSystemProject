@@ -7,9 +7,10 @@ import { PersonSelector } from '../../components/PersonSelector/PersonSelector';
 import { observer } from 'mobx-react';
 import { PersonData } from '../../components/PersonData/PersonData';
 import { FoodData } from '../../components/FoodData/FoodData';
+import { IngredientVisualizer } from '../../components/IngredientVisualizer/IngredientVisualizer';
 
 @observer export class DashBoard extends React.Component {
-    constructor(props:any){
+    constructor(props: any) {
         super(props);
         store.operations.initializeVariables();
         store.operations.generateUserArray();
@@ -20,10 +21,25 @@ import { FoodData } from '../../components/FoodData/FoodData';
 
 
         //Give Style to input in PersonSelector.tsx
-        return <div>
+        return <div className='dashBoard'>
             <PersonSelector />
-            <PersonData />
-            <FoodData />
+            <div className={store.dash.showSelector ? 'data withMargin' : 'data  withoutMargin' }>
+                <PersonData />
+                <FoodData />
+            </div>
+            <IngredientVisualizer />
+
+            <div className={store.dash.showSelector ? 'toogler tooglerHidden' : 'toogler  tooglerVisible' } onClick={
+                (e) => {
+                    store.dash.showSelector = !store.dash.showSelector;
+                    console.log(store.dash.showSelector, 'store dash show selector')
+                }
+            }>
+
+            </div>
+            }
+        
+        
         </div>
     }
 }

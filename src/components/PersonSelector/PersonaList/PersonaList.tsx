@@ -16,11 +16,16 @@ export const PersonaList = ({ id, name, img }: PersonaListProps) => {
 
       };
     
-    return <div className="personaList" onClick={(e) => {
+
+
+    return <div className="personaList" 
+    draggable 
+    onDragStart = { (e) => {
+        store.dash.ondragstart(e, id);
+    }}
+    onClick={(e) => {
         e.preventDefault();
-        store.operations.actualUserID = id;
-        console.log(store.operations.actualUserID);
-        store.operations.getSelectedPersonData();
+        store.operations.getSelectedPersonData(id);
         }}>
             <p>{name.substr(0,name.indexOf(' '))}</p>
 
